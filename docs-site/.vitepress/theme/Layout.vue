@@ -72,23 +72,44 @@ const { frontmatter } = useData()
 
 <style>
 /* VitePressのヒーローセクションの余白を調整 */
-.VPHero.has-image .image {
+/* 根本原因: .image-containerが固定サイズ(320px)のため、動画サイズと不一致 */
+
+/* デスクトップ */
+.VPHomeHero.has-image .image-container {
+  width: 280px !important;
+  height: 280px !important;
+}
+
+.VPHomeHero.has-image .image {
   margin-top: 0 !important;
 }
 
+/* 背景の円を非表示 */
+.VPHomeHero .image-bg {
+  display: none !important;
+}
+
+/* タブレット */
 @media (max-width: 960px) {
-  .VPHero.has-image .image {
-    margin-bottom: 24px !important;
+  .VPHomeHero.has-image .image-container {
+    width: 220px !important;
+    height: 220px !important;
   }
 
-  .VPHero.has-image .image-container {
-    padding: 0 !important;
+  .VPHomeHero.has-image .image {
+    margin-bottom: 16px !important;
   }
 }
 
+/* モバイル */
 @media (max-width: 640px) {
-  .VPHero.has-image .image {
-    margin-bottom: 16px !important;
+  .VPHomeHero.has-image .image-container {
+    width: 160px !important;
+    height: 160px !important;
+  }
+
+  .VPHomeHero.has-image .image {
+    margin-bottom: 12px !important;
   }
 }
 </style>
