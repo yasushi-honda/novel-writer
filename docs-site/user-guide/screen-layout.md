@@ -140,15 +140,15 @@ AIの挙動やプロフィールを設定
 
 <CardGrid :columns="3">
 
-<FeatureCard icon="**B**" title="太字" color="#1e293b">
+<FeatureCard icon="𝐁" title="太字" color="#1e293b">
 テキストを強調
 </FeatureCard>
 
-<FeatureCard icon="<u>U</u>" title="下線" color="#1e293b">
+<FeatureCard icon="U̲" title="下線" color="#1e293b">
 下線を追加
 </FeatureCard>
 
-<FeatureCard icon="H" title="見出し" color="#1e293b">
+<FeatureCard icon="𝐇" title="見出し" color="#1e293b">
 章タイトルを作成
 </FeatureCard>
 
