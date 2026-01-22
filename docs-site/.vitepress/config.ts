@@ -136,7 +136,12 @@ export default withMermaid(
     },
 
     mermaid: {
-      // Mermaidの設定
+      // ダークモード対応: VitePressのテーマと連動
+      theme: 'default',
+    },
+
+    mermaidPlugin: {
+      class: 'mermaid',
     },
 
     markdown: {

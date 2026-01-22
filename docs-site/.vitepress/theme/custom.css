@@ -21,6 +21,13 @@
   -webkit-text-fill-color: transparent;
 }
 
+.dark .VPHero .name {
+  background: linear-gradient(120deg, #818cf8 30%, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* 日本語フォント最適化 */
 body {
   font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
@@ -50,6 +57,21 @@ body {
   border-color: #ef4444;
 }
 
+/* ダークモード時のカスタムブロック */
+.dark .custom-block.warning {
+  border-color: #fbbf24;
+  background-color: rgba(251, 191, 36, 0.1);
+}
+
+.dark .custom-block.danger {
+  border-color: #f87171;
+  background-color: rgba(248, 113, 113, 0.1);
+}
+
+.dark .custom-block.tip {
+  background-color: rgba(129, 140, 248, 0.1);
+}
+
 /* テーブルスタイル */
 .vp-doc table {
   display: table;
@@ -77,6 +99,10 @@ body {
 .VPFeature:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.dark .VPFeature:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* ナビゲーション */
