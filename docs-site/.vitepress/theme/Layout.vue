@@ -56,9 +56,14 @@ const { frontmatter } = useData()
 
 /* モバイル */
 @media (max-width: 640px) {
+  .hero-video-container {
+    margin-top: 16px;
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
   .hero-video {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(107, 83, 68, 0.15);
   }
