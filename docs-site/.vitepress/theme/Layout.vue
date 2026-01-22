@@ -48,22 +48,17 @@ const { frontmatter } = useData()
 /* タブレット */
 @media (max-width: 960px) {
   .hero-video {
-    width: 240px;
-    height: 240px;
+    width: 220px;
+    height: 220px;
     border-radius: 14px;
   }
 }
 
 /* モバイル */
 @media (max-width: 640px) {
-  .hero-video-container {
-    margin-top: 16px;
-    padding-top: env(safe-area-inset-top, 0);
-  }
-
   .hero-video {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(107, 83, 68, 0.15);
   }
@@ -72,5 +67,28 @@ const { frontmatter } = useData()
 /* ダークモード */
 .dark .hero-video {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+</style>
+
+<style>
+/* VitePressのヒーローセクションの余白を調整 */
+.VPHero.has-image .image {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 960px) {
+  .VPHero.has-image .image {
+    margin-bottom: 24px !important;
+  }
+
+  .VPHero.has-image .image-container {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .VPHero.has-image .image {
+    margin-bottom: 16px !important;
+  }
 }
 </style>
