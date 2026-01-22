@@ -12,6 +12,7 @@ import FeatureCard from './components/FeatureCard.vue'
 import CardGrid from './components/CardGrid.vue'
 import Accordion from './components/Accordion.vue'
 import FaqItem from './components/FaqItem.vue'
+import PromoVideo from './components/PromoVideo.vue'
 
 export default {
   extends: DefaultTheme,
@@ -24,6 +25,7 @@ export default {
     app.component('CardGrid', CardGrid)
     app.component('Accordion', Accordion)
     app.component('FaqItem', FaqItem)
+    app.component('PromoVideo', PromoVideo)
   }
 } satisfies Theme
 
