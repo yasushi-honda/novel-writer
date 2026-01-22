@@ -6,33 +6,55 @@
 
 小説らいたーの画面は、大きく3つのエリアに分かれています。
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                         ヘッダー                              │
-├────────────┬───────────────────────────┬────────────────────┤
-│            │                           │                    │
-│   左パネル  │        中央パネル          │     右パネル        │
-│  (設定資料) │        (本文エリア)        │   (AIアシスタント)  │
-│            │                           │                    │
-│            │                           │                    │
-└────────────┴───────────────────────────┴────────────────────┘
-```
+<ScreenLayout />
 
 ## ヘッダー
 
 画面上部のヘッダーには、主要な操作ボタンが並んでいます。
 
-| ボタン | 機能 | ショートカット |
-|--------|------|--------------|
-| ← プロジェクト一覧へ | プロジェクト選択画面に戻る | - |
-| エクスポート | プロジェクトをJSONで保存 | - |
-| 検索 | プロジェクト全体を検索 | `Ctrl+F` |
-| 表示設定 | テーマ、フォント変更 | - |
-| モード切替 | シンプル/標準を切り替え | - |
-| プレビュー | 本文のプレビュー表示 | - |
-| .txt出力 | テキストファイルで保存 | - |
-| .html出力 | 装飾付きHTMLで保存 | - |
-| サイドバー開閉 | 左右パネルの表示切替 | `Ctrl+[` / `Ctrl+]` |
+<CardGrid :columns="2">
+
+<FeatureCard icon="🏠" title="プロジェクト一覧へ" color="#6366f1">
+プロジェクト選択画面に戻ります
+</FeatureCard>
+
+<FeatureCard icon="📤" title="エクスポート" color="#8b5cf6">
+プロジェクトをJSONで保存
+</FeatureCard>
+
+<FeatureCard icon="🔍" title="検索" color="#06b6d4">
+プロジェクト全体を検索<br>
+<strong>Ctrl+F</strong>
+</FeatureCard>
+
+<FeatureCard icon="🎨" title="表示設定" color="#10b981">
+テーマ、フォント変更
+</FeatureCard>
+
+<FeatureCard icon="🔄" title="モード切替" color="#f59e0b">
+シンプル/標準を切り替え
+</FeatureCard>
+
+<FeatureCard icon="👁️" title="プレビュー" color="#ec4899">
+本文のプレビュー表示
+</FeatureCard>
+
+<FeatureCard icon="📝" title=".txt出力" color="#64748b">
+テキストファイルで保存
+</FeatureCard>
+
+<FeatureCard icon="🌐" title=".html出力" color="#ef4444">
+装飾付きHTMLで保存
+</FeatureCard>
+
+</CardGrid>
+
+### サイドバー開閉ショートカット
+
+| 操作 | ショートカット |
+|------|--------------|
+| 左パネル開閉 | `Ctrl+[` |
+| 右パネル開閉 | `Ctrl+]` |
 
 ## 左パネル（設定ライブラリ）
 
@@ -42,20 +64,49 @@
 
 左パネルには3つのタブがあります。
 
-### 設定ライブラリ タブ
+<Accordion icon="📚" title="設定ライブラリ タブ" defaultOpen>
 
 物語を構成するすべての「資料」を管理します。
 
-- **設定ボタン**: AIの挙動やプロフィールを設定
-- **キャラクター**: 登場人物の一覧と作成
-- **世界観**: 場所、組織、魔法体系などの設定
-- **相関図**: キャラクター間の関係を視覚化
-- **タイムライン**: 時系列で出来事を管理
-- **固有名詞ジェネレーター**: 名前のアイデアを生成
-- **ナレッジベース**: 独自用語の辞書
-- **プロットボード**: ストーリーの骨組み
+<CardGrid :columns="2">
 
-### アウトライン タブ
+<FeatureCard icon="👤" title="キャラクター" color="#ec4899">
+登場人物の一覧と作成
+</FeatureCard>
+
+<FeatureCard icon="🌍" title="世界観" color="#10b981">
+場所、組織、魔法体系などの設定
+</FeatureCard>
+
+<FeatureCard icon="🔗" title="相関図" color="#8b5cf6">
+キャラクター間の関係を視覚化
+</FeatureCard>
+
+<FeatureCard icon="📅" title="タイムライン" color="#06b6d4">
+時系列で出来事を管理
+</FeatureCard>
+
+<FeatureCard icon="✨" title="固有名詞ジェネレーター" color="#f59e0b">
+名前のアイデアを生成
+</FeatureCard>
+
+<FeatureCard icon="📖" title="ナレッジベース" color="#6366f1">
+独自用語の辞書
+</FeatureCard>
+
+<FeatureCard icon="🗂️" title="プロットボード" color="#ef4444">
+ストーリーの骨組み
+</FeatureCard>
+
+<FeatureCard icon="⚙️" title="設定" color="#64748b">
+AIの挙動やプロフィールを設定
+</FeatureCard>
+
+</CardGrid>
+
+</Accordion>
+
+<Accordion icon="📋" title="アウトライン タブ">
 
 本文の構造を章単位で管理します。
 
@@ -63,12 +114,16 @@
 - ドラッグ&ドロップで章の順番を入れ替え
 - 章ごとのメモを記録
 
-### バージョン管理 タブ
+</Accordion>
+
+<Accordion icon="🔄" title="バージョン管理 タブ">
 
 プロジェクトの状態を保存・復元できます。
 
 - **スナップショットを保存**: 現在の状態を保存
 - **スナップショットを管理**: 過去の状態を復元
+
+</Accordion>
 
 ## 中央パネル（本文エリア）
 
@@ -83,12 +138,29 @@
 
 段落の編集ボタンをクリックすると、編集モードになります。
 
-**ツールバー機能**:
-- **太字**: テキストを強調
-- **下線**: 下線を追加
-- **見出し**: 章タイトルを作成
-- **ルビ**: ふりがなを追加
-- **文字色**: テキストの色を変更
+<CardGrid :columns="3">
+
+<FeatureCard icon="**B**" title="太字" color="#1e293b">
+テキストを強調
+</FeatureCard>
+
+<FeatureCard icon="<u>U</u>" title="下線" color="#1e293b">
+下線を追加
+</FeatureCard>
+
+<FeatureCard icon="H" title="見出し" color="#1e293b">
+章タイトルを作成
+</FeatureCard>
+
+<FeatureCard icon="ル" title="ルビ" color="#1e293b">
+ふりがなを追加
+</FeatureCard>
+
+<FeatureCard icon="🎨" title="文字色" color="#1e293b">
+テキストの色を変更
+</FeatureCard>
+
+</CardGrid>
 
 ### 直接入力エリア
 
@@ -104,10 +176,17 @@ AIと対話するエリアです。
 
 ### モード切替
 
-| モード | 用途 |
-|--------|------|
-| 相談モード | アイデア出し、プロット相談 |
-| 執筆モード | 物語の続きを書いてもらう |
+<CardGrid :columns="2">
+
+<FeatureCard icon="💬" title="相談モード" color="#8b5cf6">
+アイデア出し、プロット相談
+</FeatureCard>
+
+<FeatureCard icon="✍️" title="執筆モード" color="#06b6d4">
+物語の続きを書いてもらう
+</FeatureCard>
+
+</CardGrid>
 
 ### 複数提案
 
@@ -123,22 +202,28 @@ AIからの提案（ナレッジ、プロット）は、承認または却下を
 
 ## レイアウトのカスタマイズ
 
-### サイドバーの幅調整
+<Accordion icon="↔️" title="サイドバーの幅調整">
 
 サイドバーの境界線をドラッグして、幅を調整できます。
 
-### パネルの開閉
+</Accordion>
+
+<Accordion icon="📐" title="パネルの開閉">
 
 - **左パネル**: `Ctrl+[`
 - **右パネル**: `Ctrl+]`
 
-### 表示設定
+</Accordion>
+
+<Accordion icon="🎨" title="表示設定">
 
 ヘッダーの「表示設定」ボタンから、以下を変更できます。
 
 - **テーマ**: ライト / セピア / ダーク
 - **フォント**: 使用するフォントを選択
 - **文字サイズ**: 本文の文字サイズを調整
+
+</Accordion>
 
 ## 次のステップ
 
