@@ -1,4 +1,22 @@
 import DefaultTheme from 'vitepress/theme'
 import './custom.css'
+import type { Theme } from 'vitepress'
 
-export default DefaultTheme
+// Custom Components
+import ScreenLayout from './components/ScreenLayout.vue'
+import InteractiveTabs from './components/InteractiveTabs.vue'
+import FeatureCard from './components/FeatureCard.vue'
+import CardGrid from './components/CardGrid.vue'
+import Accordion from './components/Accordion.vue'
+
+export default {
+  extends: DefaultTheme,
+  enhanceApp({ app }) {
+    // Register global components
+    app.component('ScreenLayout', ScreenLayout)
+    app.component('InteractiveTabs', InteractiveTabs)
+    app.component('FeatureCard', FeatureCard)
+    app.component('CardGrid', CardGrid)
+    app.component('Accordion', Accordion)
+  }
+} satisfies Theme
