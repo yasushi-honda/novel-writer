@@ -1,343 +1,574 @@
 /*
- * 小説らいたー ドキュメント - カスタムテーマ
- * Catppuccin Latte (Light) / Mocha (Dark) ベース
+ * 小説らいたー ドキュメント - プロフェッショナルテーマ
+ *
+ * Design System:
+ * - Color: Catppuccin Latte (Light) / Mocha (Dark)
+ * - Spacing: 8px grid (8, 16, 24, 32, 40, 48, 56, 64)
+ * - Typography: 17px base, 1.7 line-height
+ * - WCAG: AA compliant contrast ratios
+ *
+ * References:
+ * - https://catppuccin.com/palette/
+ * - https://www.learnui.design/blog/mobile-desktop-website-font-size-guidelines.html
+ * - https://ui-deploy.com/blog/complete-dark-mode-design-guide-ui-patterns-and-implementation-best-practices-2025
  */
 
 /* ========================================
-   ライトモード (Catppuccin Latte)
+   Design Tokens - 8px Grid System
    ======================================== */
 :root {
-  /* ブランドカラー */
-  --vp-c-brand-1: #8839ef;
-  --vp-c-brand-2: #7c3aed;
-  --vp-c-brand-3: #6d28d9;
-  --vp-c-brand-soft: rgba(136, 57, 239, 0.12);
+  /* Spacing Scale (8px grid) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
 
-  /* アクセントカラー */
-  --novel-accent-pink: #ea76cb;
-  --novel-accent-blue: #1e66f5;
-  --novel-accent-teal: #179299;
-  --novel-accent-green: #40a02b;
-  --novel-accent-peach: #fe640b;
-  --novel-accent-red: #d20f39;
-  --novel-accent-yellow: #df8e1d;
+  /* Typography Scale */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1.0625rem; /* 17px - optimal for reading */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
 
-  /* 背景・テキスト */
-  --novel-bg-base: #eff1f5;
-  --novel-bg-surface: #e6e9ef;
-  --novel-text-primary: #4c4f69;
-  --novel-text-secondary: #6c6f85;
+  /* Line Heights */
+  --line-height-tight: 1.3;
+  --line-height-normal: 1.7;
+  --line-height-relaxed: 1.8;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
 }
 
 /* ========================================
-   ダークモード (Catppuccin Mocha)
+   Light Mode (Catppuccin Latte)
+   ======================================== */
+:root {
+  /* Brand Colors */
+  --vp-c-brand-1: #7c3aed;
+  --vp-c-brand-2: #8b5cf6;
+  --vp-c-brand-3: #6d28d9;
+  --vp-c-brand-soft: rgba(124, 58, 237, 0.12);
+
+  /* Semantic Colors */
+  --color-accent-pink: #db2777;
+  --color-accent-blue: #2563eb;
+  --color-accent-teal: #0d9488;
+  --color-accent-green: #16a34a;
+  --color-accent-orange: #ea580c;
+  --color-accent-red: #dc2626;
+  --color-accent-yellow: #ca8a04;
+
+  /* Surface Colors - Elevation System */
+  --color-surface-0: #ffffff;
+  --color-surface-1: #f8fafc;
+  --color-surface-2: #f1f5f9;
+  --color-surface-3: #e2e8f0;
+
+  /* Text Colors */
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748b;
+}
+
+/* ========================================
+   Dark Mode (Catppuccin Mocha - Refined)
    ======================================== */
 .dark {
-  /* ブランドカラー */
-  --vp-c-brand-1: #cba6f7;
-  --vp-c-brand-2: #b4befe;
-  --vp-c-brand-3: #89b4fa;
-  --vp-c-brand-soft: rgba(203, 166, 247, 0.15);
+  /* Brand Colors - Desaturated for dark mode */
+  --vp-c-brand-1: #c4b5fd;
+  --vp-c-brand-2: #a78bfa;
+  --vp-c-brand-3: #8b5cf6;
+  --vp-c-brand-soft: rgba(196, 181, 253, 0.15);
 
-  /* アクセントカラー */
-  --novel-accent-pink: #f5c2e7;
-  --novel-accent-blue: #89b4fa;
-  --novel-accent-teal: #94e2d5;
-  --novel-accent-green: #a6e3a1;
-  --novel-accent-peach: #fab387;
-  --novel-accent-red: #f38ba8;
-  --novel-accent-yellow: #f9e2af;
+  /* Semantic Colors - Softer for dark backgrounds */
+  --color-accent-pink: #f9a8d4;
+  --color-accent-blue: #93c5fd;
+  --color-accent-teal: #5eead4;
+  --color-accent-green: #86efac;
+  --color-accent-orange: #fdba74;
+  --color-accent-red: #fca5a5;
+  --color-accent-yellow: #fde047;
 
-  /* 背景・テキスト */
-  --novel-bg-base: #1e1e2e;
-  --novel-bg-surface: #313244;
-  --novel-text-primary: #cdd6f4;
-  --novel-text-secondary: #a6adc8;
+  /* Surface Colors - Elevation System (lighter = higher) */
+  --color-surface-0: #0f172a;
+  --color-surface-1: #1e293b;
+  --color-surface-2: #334155;
+  --color-surface-3: #475569;
 
-  /* VitePressのダークモード背景を調整 */
-  --vp-c-bg: #1e1e2e;
-  --vp-c-bg-soft: #313244;
-  --vp-c-bg-mute: #45475a;
-  --vp-c-bg-alt: #181825;
+  /* Text Colors - Off-white for comfort */
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+  --color-text-tertiary: #94a3b8;
+
+  /* VitePress Dark Mode Overrides */
+  --vp-c-bg: var(--color-surface-0);
+  --vp-c-bg-soft: var(--color-surface-1);
+  --vp-c-bg-mute: var(--color-surface-2);
+  --vp-c-bg-alt: #020617;
+
+  /* Enhanced Text Contrast */
+  --vp-c-text-1: var(--color-text-primary);
+  --vp-c-text-2: var(--color-text-secondary);
+  --vp-c-text-3: var(--color-text-tertiary);
 }
 
 /* ========================================
-   タイポグラフィ
+   Base Typography
    ======================================== */
 body {
-  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Document Typography */
+.vp-doc {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+.vp-doc p {
+  margin-bottom: var(--space-2);
+}
+
+.vp-doc h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
+}
+
+.vp-doc h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.vp-doc h4 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+
+/* Optimal reading width: 50-75 characters */
+.vp-doc .content-container {
+  max-width: 720px;
 }
 
 /* ========================================
-   ヒーローセクション
+   Hero Section
    ======================================== */
 .VPHero .name {
-  background: linear-gradient(135deg, #8839ef 0%, #ea76cb 50%, #1e66f5 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #2563eb 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
 .dark .VPHero .name {
-  background: linear-gradient(135deg, #cba6f7 0%, #f5c2e7 50%, #89b4fa 100%);
+  background: linear-gradient(135deg, #c4b5fd 0%, #f9a8d4 50%, #93c5fd 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .VPHero .tagline {
-  color: var(--novel-text-secondary);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
 }
 
-/* ヒーローボタン */
+/* Hero Buttons */
 .VPButton.brand {
   background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
   border: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .VPButton.brand:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(136, 57, 239, 0.3);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.35);
 }
 
 .dark .VPButton.brand:hover {
-  box-shadow: 0 8px 20px rgba(203, 166, 247, 0.25);
+  box-shadow: 0 8px 24px rgba(196, 181, 253, 0.25);
+}
+
+.VPButton.alt {
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-3);
+  font-weight: 600;
 }
 
 /* ========================================
-   フィーチャーカード
+   Feature Cards
    ======================================== */
 .VPFeature {
-  background: var(--vp-c-bg-soft);
+  background: var(--color-surface-1);
   border: 1px solid transparent;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  transition: all 0.25s ease;
 }
 
 .VPFeature:hover {
   transform: translateY(-4px);
   border-color: var(--vp-c-brand-soft);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 var(--space-2) var(--space-4) rgba(0, 0, 0, 0.06);
+}
+
+.dark .VPFeature {
+  background: var(--color-surface-1);
 }
 
 .dark .VPFeature:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-  border-color: rgba(203, 166, 247, 0.3);
+  box-shadow: 0 var(--space-2) var(--space-4) rgba(0, 0, 0, 0.4);
+  border-color: rgba(196, 181, 253, 0.25);
 }
 
 .VPFeature .icon {
-  font-size: 28px;
-  margin-bottom: 8px;
+  font-size: var(--space-4);
+  margin-bottom: var(--space-1);
+}
+
+.VPFeature .title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.VPFeature .details {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
 }
 
 /* ========================================
-   ナビゲーション
+   Navigation
    ======================================== */
 .VPNavBar {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.dark .VPNavBar {
+  background: rgba(15, 23, 42, 0.85);
 }
 
 .VPNavBar .title {
   font-weight: 700;
-  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: var(--font-size-lg);
 }
 
-/* アクティブなナビリンク */
-.VPNavBarMenuLink.active {
+.VPNavBarMenuLink {
+  font-weight: 500;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  transition: all 0.15s ease;
+}
+
+.VPNavBarMenuLink:hover {
+  background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
 }
 
+.VPNavBarMenuLink.active {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
 /* ========================================
-   サイドバー
+   Sidebar
    ======================================== */
 .VPSidebar {
-  backdrop-filter: blur(8px);
+  font-size: var(--font-size-sm);
+}
+
+.VPSidebarItem .text {
+  font-weight: 500;
 }
 
 .VPSidebarItem.is-active > .item > .link {
   color: var(--vp-c-brand-1);
   font-weight: 600;
+  background: var(--vp-c-brand-soft);
+  border-radius: var(--radius-md);
+}
+
+.VPSidebarItem .link {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  transition: all 0.15s ease;
 }
 
 .VPSidebarItem .link:hover {
   color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
 }
 
 /* ========================================
-   カスタムブロック
+   Custom Blocks
    ======================================== */
 .custom-block {
-  border-radius: 8px;
-  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  margin: var(--space-3) 0;
+}
+
+.custom-block .custom-block-title {
+  font-weight: 600;
+  margin-bottom: var(--space-1);
 }
 
 .custom-block.tip {
-  background: linear-gradient(135deg, rgba(136, 57, 239, 0.08), rgba(234, 118, 203, 0.08));
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(139, 92, 246, 0.05));
   border-left: 4px solid var(--vp-c-brand-1);
 }
 
 .dark .custom-block.tip {
-  background: linear-gradient(135deg, rgba(203, 166, 247, 0.1), rgba(245, 194, 231, 0.1));
-  border-left-color: var(--novel-accent-pink);
+  background: linear-gradient(135deg, rgba(196, 181, 253, 0.1), rgba(167, 139, 250, 0.06));
+  border-left-color: var(--vp-c-brand-1);
 }
 
 .custom-block.warning {
-  background: linear-gradient(135deg, rgba(223, 142, 29, 0.1), rgba(254, 100, 11, 0.08));
-  border-left: 4px solid var(--novel-accent-yellow);
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.08), rgba(251, 146, 60, 0.05));
+  border-left: 4px solid var(--color-accent-orange);
 }
 
 .dark .custom-block.warning {
-  background: linear-gradient(135deg, rgba(249, 226, 175, 0.1), rgba(250, 179, 135, 0.08));
-  border-left-color: var(--novel-accent-peach);
+  background: linear-gradient(135deg, rgba(253, 186, 116, 0.1), rgba(254, 215, 170, 0.06));
+  border-left-color: var(--color-accent-orange);
 }
 
 .custom-block.danger {
-  background: linear-gradient(135deg, rgba(210, 15, 57, 0.08), rgba(230, 69, 83, 0.06));
-  border-left: 4px solid var(--novel-accent-red);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(239, 68, 68, 0.05));
+  border-left: 4px solid var(--color-accent-red);
 }
 
 .dark .custom-block.danger {
-  background: linear-gradient(135deg, rgba(243, 139, 168, 0.1), rgba(235, 160, 172, 0.08));
-  border-left-color: var(--novel-accent-red);
+  background: linear-gradient(135deg, rgba(252, 165, 165, 0.1), rgba(254, 202, 202, 0.06));
+  border-left-color: var(--color-accent-red);
 }
 
 .custom-block.info {
-  background: linear-gradient(135deg, rgba(30, 102, 245, 0.08), rgba(32, 159, 181, 0.06));
-  border-left: 4px solid var(--novel-accent-blue);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(59, 130, 246, 0.05));
+  border-left: 4px solid var(--color-accent-blue);
 }
 
 .dark .custom-block.info {
-  background: linear-gradient(135deg, rgba(137, 180, 250, 0.1), rgba(116, 199, 236, 0.08));
-  border-left-color: var(--novel-accent-blue);
+  background: linear-gradient(135deg, rgba(147, 197, 253, 0.1), rgba(191, 219, 254, 0.06));
+  border-left-color: var(--color-accent-blue);
 }
 
 /* ========================================
-   テーブル
+   Tables
    ======================================== */
 .vp-doc table {
   display: table;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  margin: 24px 0;
-  border-radius: 8px;
+  margin: var(--space-3) 0;
+  border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--vp-c-divider);
+  font-size: var(--font-size-sm);
 }
 
 .vp-doc th {
-  background: linear-gradient(135deg, var(--vp-c-bg-soft), var(--vp-c-bg-mute));
+  background: var(--color-surface-2);
   font-weight: 600;
-  padding: 14px 16px;
+  padding: var(--space-2);
   text-align: left;
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .vp-doc td {
-  padding: 12px 16px;
+  padding: var(--space-2);
   border-bottom: 1px solid var(--vp-c-divider);
+  vertical-align: top;
 }
 
 .vp-doc tr:last-child td {
   border-bottom: none;
 }
 
-.vp-doc tr:hover td {
-  background: var(--vp-c-bg-soft);
+.vp-doc tbody tr {
+  transition: background 0.15s ease;
+}
+
+.vp-doc tbody tr:hover {
+  background: var(--color-surface-1);
 }
 
 /* ========================================
-   コードブロック
+   Code Blocks
    ======================================== */
 .vp-code-group {
-  margin: 20px 0;
-  border-radius: 12px;
+  margin: var(--space-3) 0;
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
 .vp-doc [class*='language-'] {
-  border-radius: 8px;
+  border-radius: var(--radius-md);
+  margin: var(--space-2) 0;
 }
 
 .vp-doc [class*='language-'] code {
-  font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', Consolas, monospace;
+  font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Menlo', Consolas, monospace;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.vp-doc :not(pre) > code {
+  background: var(--color-surface-2);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+}
+
+.dark .vp-doc :not(pre) > code {
+  background: var(--color-surface-2);
 }
 
 /* ========================================
-   Mermaid図 - ネイティブテーマ使用
+   Mermaid Diagrams
    ======================================== */
 .mermaid {
-  margin: 28px 0;
-  padding: 20px;
-  background: var(--vp-c-bg-soft);
-  border-radius: 12px;
+  margin: var(--space-4) 0;
+  padding: var(--space-3);
+  background: var(--color-surface-1);
+  border-radius: var(--radius-lg);
   text-align: center;
+  border: 1px solid var(--vp-c-divider);
 }
 
-/* Mermaidはネイティブのdarkテーマを使用するため、フィルター不要 */
+.dark .mermaid {
+  background: var(--color-surface-1);
+}
 
 /* ========================================
-   リンク
+   Links
    ======================================== */
 .vp-doc a {
   color: var(--vp-c-brand-1);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
+  font-weight: 500;
+  transition: all 0.15s ease;
 }
 
 .vp-doc a:hover {
-  border-bottom-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ========================================
-   フッター
+   Lists
+   ======================================== */
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: var(--space-3);
+  margin: var(--space-2) 0;
+}
+
+.vp-doc li {
+  margin: var(--space-1) 0;
+}
+
+.vp-doc li::marker {
+  color: var(--color-text-tertiary);
+}
+
+/* ========================================
+   Footer
    ======================================== */
 .VPFooter {
   border-top: 1px solid var(--vp-c-divider);
+  padding: var(--space-4) var(--space-3);
+}
+
+.VPFooter .message,
+.VPFooter .copyright {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
 }
 
 /* ========================================
-   スクロールバー
+   Scrollbar
    ======================================== */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: var(--space-1);
+  height: var(--space-1);
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--vp-c-bg);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--vp-c-divider);
-  border-radius: 4px;
+  background: var(--color-surface-3);
+  border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--vp-c-brand-soft);
+  background: var(--color-text-tertiary);
 }
 
 /* ========================================
-   レスポンシブ: タブレット
+   Responsive: Tablet (768px)
    ======================================== */
 @media (max-width: 768px) {
+  :root {
+    --font-size-base: 1rem; /* 16px */
+    --font-size-4xl: 2rem;  /* 32px */
+    --font-size-3xl: 1.5rem; /* 24px */
+    --font-size-2xl: 1.25rem; /* 20px */
+  }
+
   .VPHero .name {
-    font-size: 32px;
+    font-size: var(--font-size-4xl);
   }
 
   .VPHero .tagline {
-    font-size: 18px;
+    font-size: var(--font-size-base);
   }
 
-  /* テーブルの横スクロール */
+  /* Table horizontal scroll */
   .vp-doc table {
     display: block;
     overflow-x: auto;
@@ -346,14 +577,13 @@ body {
 
   .vp-doc th,
   .vp-doc td {
-    padding: 10px 12px;
-    font-size: 14px;
+    padding: var(--space-1) var(--space-2);
     white-space: nowrap;
   }
 
-  /* Mermaid図 */
+  /* Mermaid diagrams */
   .mermaid {
-    padding: 12px;
+    padding: var(--space-2);
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -363,71 +593,48 @@ body {
     height: auto;
   }
 
-  /* コードブロック */
-  .vp-doc [class*='language-'] code {
-    font-size: 13px;
-  }
-
-  /* カスタムブロック */
+  /* Custom blocks */
   .custom-block {
-    padding: 12px 16px;
+    padding: var(--space-2);
   }
 
-  /* 本文 */
-  .vp-doc p {
-    line-height: 1.8;
-  }
-
-  /* タップ領域 */
-  .vp-doc a {
-    padding: 2px 0;
-  }
-
+  /* Sidebar touch targets */
   .VPSidebarItem .link {
-    padding: 10px 12px;
+    padding: var(--space-1) var(--space-2);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 }
 
 /* ========================================
-   レスポンシブ: スマートフォン
+   Responsive: Mobile (375px)
    ======================================== */
 @media (max-width: 375px) {
-  .VPHero .name {
-    font-size: 26px;
-  }
-
-  .VPHero .tagline {
-    font-size: 15px;
+  :root {
+    --font-size-base: 0.9375rem; /* 15px */
+    --font-size-4xl: 1.75rem; /* 28px */
+    --font-size-2xl: 1.125rem; /* 18px */
   }
 
   .vp-doc h1 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .vp-doc h2 {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
   .vp-doc h3 {
-    font-size: 17px;
-  }
-
-  .vp-doc th,
-  .vp-doc td {
-    padding: 8px 10px;
-    font-size: 13px;
+    font-size: 1.125rem;
   }
 }
 
 /* ========================================
-   タッチデバイス
+   Touch Devices
    ======================================== */
 @media (hover: none) {
-  .VPFeature:hover {
-    transform: none;
-    box-shadow: none;
-  }
-
+  .VPFeature:hover,
   .VPButton.brand:hover {
     transform: none;
     box-shadow: none;
@@ -435,12 +642,12 @@ body {
 }
 
 /* ========================================
-   アニメーション
+   Animations & Transitions
    ======================================== */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -449,14 +656,50 @@ body {
 }
 
 .VPContent {
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.3s ease-out;
 }
 
-/* ダークモード切り替え時のスムーズな遷移 */
+/* Smooth theme transition */
 html {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 html.dark {
   color-scheme: dark;
+}
+
+/* ========================================
+   Focus States (Accessibility)
+   ======================================== */
+:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+@media print {
+  .VPNavBar,
+  .VPSidebar,
+  .VPFooter {
+    display: none;
+  }
+
+  .vp-doc {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .vp-doc a {
+    color: inherit;
+    text-decoration: underline;
+  }
 }
