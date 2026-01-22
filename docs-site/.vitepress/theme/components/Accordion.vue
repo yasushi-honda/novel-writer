@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   title: string
   icon?: string
   defaultOpen?: boolean
 }>()
 
-const isOpen = ref(false)
+const isOpen = ref(props.defaultOpen ?? false)
 
 const toggle = () => {
   isOpen.value = !isOpen.value
@@ -15,7 +15,7 @@ const toggle = () => {
 </script>
 
 <template>
-  <div :class="['accordion', { open: isOpen || defaultOpen }]">
+  <div :class="['accordion', { open: isOpen }]">
     <button class="accordion-header" @click="toggle">
       <span v-if="icon" class="accordion-icon">{{ icon }}</span>
       <span class="accordion-title">{{ title }}</span>
