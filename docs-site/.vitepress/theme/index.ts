@@ -2,6 +2,9 @@ import DefaultTheme from 'vitepress/theme'
 import './custom.css'
 import type { Theme } from 'vitepress'
 
+// Custom Layout
+import Layout from './Layout.vue'
+
 // Custom Components
 import ScreenLayout from './components/ScreenLayout.vue'
 import InteractiveTabs from './components/InteractiveTabs.vue'
@@ -12,6 +15,7 @@ import FaqItem from './components/FaqItem.vue'
 
 export default {
   extends: DefaultTheme,
+  Layout,
   enhanceApp({ app }) {
     // Register global components
     app.component('ScreenLayout', ScreenLayout)
