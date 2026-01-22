@@ -98,4 +98,96 @@ body {
   .VPHero .tagline {
     font-size: 18px;
   }
+
+  /* テーブルの横スクロール対応 */
+  .vp-doc table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .vp-doc th,
+  .vp-doc td {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* Mermaid図のスケーリング */
+  .mermaid {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* コードブロックの調整 */
+  .vp-doc [class*='language-'] code {
+    font-size: 13px;
+  }
+
+  /* カスタムブロックの調整 */
+  .custom-block {
+    padding: 12px 16px;
+  }
+
+  /* 本文の行間調整 */
+  .vp-doc p {
+    line-height: 1.8;
+  }
+
+  /* リンクのタップ領域拡大 */
+  .vp-doc a {
+    padding: 2px 0;
+  }
+
+  /* サイドバーのタップ領域 */
+  .VPSidebarItem .link {
+    padding: 8px 12px;
+  }
+}
+
+/* 小さいスマホ向け（iPhone SE等） */
+@media (max-width: 375px) {
+  .VPHero .name {
+    font-size: 28px;
+  }
+
+  .VPHero .tagline {
+    font-size: 16px;
+  }
+
+  .vp-doc h1 {
+    font-size: 24px;
+  }
+
+  .vp-doc h2 {
+    font-size: 20px;
+  }
+
+  .vp-doc h3 {
+    font-size: 18px;
+  }
+
+  .vp-doc th,
+  .vp-doc td {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+}
+
+/* タッチデバイス向けホバー無効化 */
+@media (hover: none) {
+  .VPFeature:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ダークモード時のMermaid図 */
+.dark .mermaid {
+  filter: invert(0.9) hue-rotate(180deg);
 }
