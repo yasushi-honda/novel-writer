@@ -39,7 +39,8 @@ const setActive = (id: string) => {
   <div class="screen-layout-container">
     <!-- ヘッダー部分 -->
     <div class="layout-header">
-      <div class="header-content">
+      <!-- デスクトップ用ヘッダー -->
+      <div class="header-content desktop-only">
         <div class="header-left">
           <span class="back-btn">← プロジェクト一覧</span>
         </div>
@@ -54,7 +55,11 @@ const setActive = (id: string) => {
           <span class="btn">.html</span>
         </div>
       </div>
-      <div class="header-label">ヘッダー</div>
+      <!-- モバイル用ヘッダー -->
+      <div class="header-mobile mobile-only">
+        <span class="header-mobile-label">ヘッダー（操作ボタン類）</span>
+      </div>
+      <div class="header-label desktop-only">ヘッダー</div>
     </div>
 
     <!-- メインパネル部分 -->
@@ -95,22 +100,22 @@ const setActive = (id: string) => {
         </div>
 
         <div class="panel-hint" v-show="activePanel !== panel.id">
-          クリックして詳細を見る
+          タップして詳細を見る
         </div>
       </div>
     </div>
 
     <!-- キャプション -->
     <div class="layout-caption">
-      <p>各パネルをクリックすると詳細が表示されます</p>
+      <p>各パネルをタップすると詳細が表示されます</p>
     </div>
   </div>
 </template>
 
 <style scoped>
 .screen-layout-container {
-  margin: 2rem 0;
-  border-radius: 16px;
+  margin: 1.5rem 0;
+  border-radius: 12px;
   overflow: hidden;
   background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-divider);
@@ -121,6 +126,15 @@ const setActive = (id: string) => {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* 表示切り替え */
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
 /* ヘッダー */
 .layout-header {
   background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
@@ -129,7 +143,6 @@ const setActive = (id: string) => {
 }
 
 .header-content {
-  display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
@@ -171,18 +184,28 @@ const setActive = (id: string) => {
   letter-spacing: 0.5em;
 }
 
+.header-mobile {
+  text-align: center;
+}
+
+.header-mobile-label {
+  color: #e2e8f0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
 /* メインパネル */
 .layout-main {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   gap: 1px;
   background: var(--vp-c-divider);
-  min-height: 350px;
+  min-height: 300px;
 }
 
 .panel {
   background: var(--vp-c-bg);
-  padding: 1.5rem;
+  padding: 1.25rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
@@ -218,15 +241,15 @@ const setActive = (id: string) => {
 
 .panel-header {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .panel-icon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 1rem;
-  padding: 12px;
-  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 0.75rem;
+  padding: 10px;
+  border-radius: 10px;
   background: var(--vp-c-bg-soft);
   color: var(--panel-color);
   transition: all 0.3s;
@@ -245,14 +268,14 @@ const setActive = (id: string) => {
 }
 
 .panel-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--vp-c-text-1);
   margin-bottom: 0.25rem;
 }
 
 .panel-subtitle {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--panel-color);
   font-weight: 600;
 }
@@ -273,9 +296,9 @@ const setActive = (id: string) => {
 }
 
 .panel-description {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: var(--vp-c-text-2);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   line-height: 1.6;
 }
 
@@ -285,14 +308,14 @@ const setActive = (id: string) => {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .panel-features li {
   background: var(--vp-c-bg);
-  padding: 0.35rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 16px;
+  font-size: 0.7rem;
   color: var(--vp-c-text-2);
   border: 1px solid var(--vp-c-divider);
   transition: all 0.2s;
@@ -306,7 +329,7 @@ const setActive = (id: string) => {
 .panel-hint {
   margin-top: auto;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--vp-c-text-3);
   opacity: 0;
   transition: opacity 0.2s;
@@ -318,7 +341,7 @@ const setActive = (id: string) => {
 
 /* キャプション */
 .layout-caption {
-  padding: 1rem;
+  padding: 0.75rem;
   text-align: center;
   background: var(--vp-c-bg-soft);
   border-top: 1px solid var(--vp-c-divider);
@@ -326,27 +349,115 @@ const setActive = (id: string) => {
 
 .layout-caption p {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: var(--vp-c-text-3);
 }
 
-/* レスポンシブ */
-@media (max-width: 768px) {
+/* タブレット */
+@media (max-width: 960px) {
+  .layout-main {
+    grid-template-columns: 1fr 1.5fr 1fr;
+    min-height: 280px;
+  }
+}
+
+/* モバイル */
+@media (max-width: 640px) {
+  .screen-layout-container {
+    margin: 1rem 0;
+    border-radius: 10px;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+
+  .layout-header {
+    padding: 0.75rem 1rem;
+  }
+
   .layout-main {
     grid-template-columns: 1fr;
-  }
-
-  .header-content {
-    flex-direction: column;
-  }
-
-  .header-label {
-    display: none;
+    min-height: auto;
+    gap: 1px;
   }
 
   .panel {
-    min-height: auto;
     padding: 1rem;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .panel::before {
+    width: 4px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: auto;
+    transform: scaleY(0);
+  }
+
+  .panel:hover::before,
+  .panel.active::before {
+    transform: scaleY(1);
+  }
+
+  .panel-header {
+    text-align: left;
+    margin-bottom: 0;
+    flex-shrink: 0;
+    width: 80px;
+  }
+
+  .panel-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 0 0.5rem 0;
+    padding: 8px;
+  }
+
+  .panel-title {
+    font-size: 0.9rem;
+  }
+
+  .panel-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .panel-details {
+    flex: 1;
+    padding-top: 0.25rem;
+  }
+
+  .panel-description {
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .panel-features {
+    gap: 0.3rem;
+  }
+
+  .panel-features li {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  .panel-hint {
+    display: none;
+  }
+
+  .layout-caption {
+    padding: 0.6rem;
+  }
+
+  .layout-caption p {
+    font-size: 0.75rem;
   }
 }
 </style>
