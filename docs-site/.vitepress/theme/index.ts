@@ -26,3 +26,4 @@ export default {
     app.component('FaqItem', FaqItem)
   }
 } satisfies Theme
+
