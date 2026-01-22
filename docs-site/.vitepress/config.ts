@@ -92,7 +92,7 @@ export default withMermaid(
 
       footer: {
         message: 'AI搭載の小説執筆支援アプリケーション',
-        copyright: 'Copyright © 2024 Novel Writer Team'
+        copyright: 'Copyright © 2026 Novel Writer Team'
       },
 
       search: {
