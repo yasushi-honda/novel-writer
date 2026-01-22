@@ -317,7 +317,7 @@ interface HistoryNode {
     timestamp: number;
     type: HistoryType;
     label: string;
-    payload: Project;  // スナップショット
+    payload: Project;
 }
 
 type HistoryType =
