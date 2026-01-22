@@ -10,17 +10,52 @@ const isDragging = ref(false)
 const startX = ref(0)
 const startY = ref(0)
 const modalContent = ref<HTMLElement | null>(null)
+const mermaidContainer = ref<HTMLElement | null>(null)
 
-const MIN_SCALE = 0.5
-const MAX_SCALE = 3
+const MIN_SCALE = 0.3
+const MAX_SCALE = 10
+
+const fitToScreen = () => {
+  nextTick(() => {
+    if (!modalContent.value || !mermaidContainer.value) return
+
+    const svg = mermaidContainer.value.querySelector('svg')
+    if (!svg) return
+
+    const containerRect = modalContent.value.getBoundingClientRect()
+    const svgRect = svg.getBoundingClientRect()
+
+    // Calculate scale to fit with padding
+    const padding = 40
+    const availableWidth = containerRect.width - padding * 2
+    const availableHeight = containerRect.height - padding * 2
+
+    // Get actual SVG dimensions
+    const svgWidth = svgRect.width / scale.value
+    const svgHeight = svgRect.height / scale.value
+
+    const scaleX = availableWidth / svgWidth
+    const scaleY = availableHeight / svgHeight
+
+    // Use the larger scale to make it readable, but cap at MAX_SCALE
+    scale.value = Math.min(Math.max(scaleX, scaleY, 2), MAX_SCALE)
+    translateX.value = 0
+    translateY.value = 0
+  })
+}
 
 const openModal = (svg: string) => {
   mermaidContent.value = svg
-  scale.value = 1
+  scale.value = 2 // Start at 200% as minimum readable size
   translateX.value = 0
   translateY.value = 0
   isOpen.value = true
   document.body.style.overflow = 'hidden'
+
+  // Auto fit after modal is rendered
+  nextTick(() => {
+    setTimeout(fitToScreen, 50)
+  })
 }
 
 const closeModal = () => {
@@ -29,23 +64,21 @@ const closeModal = () => {
 }
 
 const resetView = () => {
-  scale.value = 1
-  translateX.value = 0
-  translateY.value = 0
+  fitToScreen()
 }
 
 const zoomIn = () => {
-  scale.value = Math.min(scale.value * 1.3, MAX_SCALE)
+  scale.value = Math.min(scale.value * 1.5, MAX_SCALE)
 }
 
 const zoomOut = () => {
-  scale.value = Math.max(scale.value / 1.3, MIN_SCALE)
+  scale.value = Math.max(scale.value / 1.5, MIN_SCALE)
 }
 
 // Mouse wheel zoom
 const handleWheel = (e: WheelEvent) => {
   e.preventDefault()
-  const delta = e.deltaY > 0 ? 0.9 : 1.1
+  const delta = e.deltaY > 0 ? 0.85 : 1.18
   scale.value = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale.value * delta))
 }
 
@@ -182,10 +215,9 @@ onUnmounted(() => {
                   <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
                 </svg>
               </button>
-              <button class="control-btn" @click="resetView" title="リセット">
+              <button class="control-btn fit-btn" @click="fitToScreen" title="画面にフィット">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                  <path d="M3 3v5h5"/>
+                  <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
                 </svg>
               </button>
               <button class="control-btn close-btn" @click="closeModal" title="閉じる">
@@ -209,6 +241,7 @@ onUnmounted(() => {
           >
             <div
               class="mermaid-content"
+              ref="mermaidContainer"
               :style="{
                 transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
                 cursor: isDragging ? 'grabbing' : 'grab'
@@ -217,7 +250,7 @@ onUnmounted(() => {
             />
           </div>
           <div class="mermaid-modal-footer">
-            <span class="hint-text">マウスホイールでズーム、ドラッグで移動</span>
+            <span class="hint-text">ホイールでズーム | ドラッグで移動 | 最大{{ MAX_SCALE * 100 }}%</span>
           </div>
         </div>
       </div>
@@ -229,7 +262,7 @@ onUnmounted(() => {
 .mermaid-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -241,19 +274,19 @@ onUnmounted(() => {
   background: var(--vp-c-bg);
   border-radius: 16px;
   width: 100%;
-  max-width: 95vw;
-  max-height: 95vh;
+  max-width: 98vw;
+  max-height: 98vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .mermaid-modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   border-bottom: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
 }
@@ -261,12 +294,13 @@ onUnmounted(() => {
 .mermaid-modal-title {
   font-weight: 600;
   color: var(--vp-c-text-1);
+  font-size: 0.95rem;
 }
 
 .mermaid-modal-controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .control-btn {
@@ -293,6 +327,16 @@ onUnmounted(() => {
   height: 20px;
 }
 
+.fit-btn {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.fit-btn:hover {
+  background: var(--vp-c-brand-1);
+  color: white;
+}
+
 .close-btn:hover {
   background: #fee2e2;
   color: #dc2626;
@@ -303,10 +347,14 @@ onUnmounted(() => {
 }
 
 .zoom-level {
-  font-size: 0.85rem;
-  color: var(--vp-c-text-2);
-  min-width: 50px;
+  font-size: 0.8rem;
+  color: var(--vp-c-text-1);
+  min-width: 55px;
   text-align: center;
+  font-weight: 600;
+  background: var(--vp-c-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
 }
 
 .mermaid-modal-content {
@@ -315,38 +363,43 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 400px;
-  background: var(--vp-c-bg);
+  min-height: 70vh;
+  background: white;
   touch-action: none;
+}
+
+.dark .mermaid-modal-content {
+  background: #1a1a2e;
 }
 
 .mermaid-content {
   transform-origin: center center;
-  transition: transform 0.1s ease-out;
+  transition: transform 0.05s ease-out;
   padding: 2rem;
 }
 
 .mermaid-content :deep(svg) {
   max-width: none !important;
   height: auto !important;
+  display: block;
 }
 
 .mermaid-modal-footer {
-  padding: 0.75rem 1.5rem;
+  padding: 0.6rem 1.25rem;
   border-top: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
   text-align: center;
 }
 
 .hint-text {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--vp-c-text-3);
 }
 
 /* Transitions */
 .modal-enter-active,
 .modal-leave-active {
-  transition: opacity 0.25s ease;
+  transition: opacity 0.2s ease;
 }
 
 .modal-enter-from,
@@ -356,46 +409,59 @@ onUnmounted(() => {
 
 .modal-enter-active .mermaid-modal,
 .modal-leave-active .mermaid-modal {
-  transition: transform 0.25s ease;
+  transition: transform 0.2s ease;
 }
 
 .modal-enter-from .mermaid-modal,
 .modal-leave-to .mermaid-modal {
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 
 /* Mobile */
 @media (max-width: 640px) {
   .mermaid-modal-overlay {
-    padding: 0.5rem;
+    padding: 0;
+  }
+
+  .mermaid-modal {
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
   }
 
   .mermaid-modal-header {
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 1rem;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .mermaid-modal-title {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    width: 100%;
+  }
+
+  .mermaid-modal-controls {
+    width: 100%;
+    justify-content: center;
   }
 
   .control-btn {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
   }
 
   .control-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
   }
 
   .zoom-level {
     font-size: 0.75rem;
+    min-width: 50px;
   }
 
   .mermaid-modal-content {
-    min-height: 300px;
+    min-height: 60vh;
   }
 
   .mermaid-modal-footer {
@@ -403,7 +469,7 @@ onUnmounted(() => {
   }
 
   .hint-text {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 }
 </style>
