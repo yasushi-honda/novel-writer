@@ -8,6 +8,7 @@ import InteractiveTabs from './components/InteractiveTabs.vue'
 import FeatureCard from './components/FeatureCard.vue'
 import CardGrid from './components/CardGrid.vue'
 import Accordion from './components/Accordion.vue'
+import FaqItem from './components/FaqItem.vue'
 
 export default {
   extends: DefaultTheme,
@@ -18,5 +19,6 @@ export default {
     app.component('FeatureCard', FeatureCard)
     app.component('CardGrid', CardGrid)
     app.component('Accordion', Accordion)
+    app.component('FaqItem', FaqItem)
   }
 } satisfies Theme
