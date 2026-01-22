@@ -10,7 +10,7 @@ export default withMermaid(
 
     head: [
       ['link', { rel: 'icon', type: 'image/svg+xml', href: '/novel-writer/favicon.svg' }],
-      ['meta', { name: 'theme-color', content: '#6366f1' }],
+      ['meta', { name: 'theme-color', content: '#8839ef' }],
     ],
 
     themeConfig: {
@@ -136,8 +136,17 @@ export default withMermaid(
     },
 
     mermaid: {
-      // ダークモード対応: VitePressのテーマと連動
-      theme: 'default',
+      // ライトモード用テーマ（ダークモードは自動検出）
+      theme: 'base',
+      themeVariables: {
+        // Catppuccin Latteベースのカスタムカラー
+        primaryColor: '#cba6f7',
+        primaryTextColor: '#4c4f69',
+        primaryBorderColor: '#8839ef',
+        lineColor: '#6c6f85',
+        secondaryColor: '#f5c2e7',
+        tertiaryColor: '#eff1f5',
+      },
     },
 
     mermaidPlugin: {
